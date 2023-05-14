@@ -69,6 +69,7 @@ public class MainController {
             List<Note> db_note = this.noteDao.queryForEq("title", selectedNote);
             this.noteDao.deleteById(db_note.get(0).getNoteId());
             listViewNotes.getItems().remove(selectedNote);
+            listViewNotes.getSelectionModel().clearSelection();
             buttonDelete.setDisable(true);
         }
     }
