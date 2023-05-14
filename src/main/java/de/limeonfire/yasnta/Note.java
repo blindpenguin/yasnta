@@ -14,8 +14,16 @@ public class Note {
     public Note() {
     }
 
+    public Integer getNoteId() {
+        return this.noteId;
+    }
+
+    public void setNoteId(Integer noteId) {
+        this.noteId = noteId;
+    }
+
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {

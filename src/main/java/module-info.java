@@ -5,6 +5,6 @@ module de.limeonfire.yasnta {
     requires java.sql;
 
 
-    opens de.limeonfire.yasnta to javafx.fxml;
+    opens de.limeonfire.yasnta to javafx.fxml, ormlite.jdbc;
     exports de.limeonfire.yasnta;
 }

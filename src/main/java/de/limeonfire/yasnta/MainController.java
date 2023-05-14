@@ -1,6 +1,8 @@
 package de.limeonfire.yasnta;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,12 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.util.Collection;
+import java.util.List;
+
 import java.sql.SQLException;
 import java.util.Objects;
 
 public class MainController {
 
-    private final Dao<Note, Integer> noteDao;
+    private Dao<Note, Integer> noteDao;
     @FXML
     public TextField textFieldTitle;
     @FXML
@@ -23,12 +28,18 @@ public class MainController {
     private ObservableList<String> notes;
     private String selectedNote;
 
-    public MainController(Dao<Note, Integer> noteDao) {
-        this.noteDao = noteDao;
+    public MainController() {
+        this.noteDao = new ConnectDB().loadDB();
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         notes = FXCollections.observableArrayList();
+
+        List<Note> db_notes = this.noteDao.queryForAll();
+
+        for(Note note : db_notes) {
+            notes.add(note.getTitle());
+        }
 
         listViewNotes.setItems(notes);
 
@@ -60,9 +71,10 @@ public class MainController {
     }
 
     @FXML
-    protected void onDeleteButtonClick() {
+    protected void onDeleteButtonClick() throws SQLException {
         if(selectedNote != null) {
-            System.out.println(selectedNote);
+            List<Note> db_note = this.noteDao.queryForEq("title", selectedNote);
+            this.noteDao.deleteById(db_note.get(0).getNoteId());
             listViewNotes.getItems().remove(selectedNote);
             buttonDelete.setDisable(true);
         }
