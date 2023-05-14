@@ -1,8 +1,6 @@
 package de.limeonfire.yasnta;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.util.Collection;
-import java.util.List;
-
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 public class MainController {
@@ -45,11 +41,8 @@ public class MainController {
 
         listViewNotes.setOnMouseClicked(event -> {
             selectedNote = listViewNotes.getSelectionModel().getSelectedItem();
-            if(selectedNote != null) {
-                buttonDelete.setDisable(false);
-            } else {
-                buttonDelete.setDisable(true);
-            }
+            // This is a simplified if-else according to IntelliJ.
+            buttonDelete.setDisable(selectedNote == null);
         });
     }
 

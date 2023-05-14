@@ -18,10 +18,6 @@ public class Note {
         return this.noteId;
     }
 
-    public void setNoteId(Integer noteId) {
-        this.noteId = noteId;
-    }
-
     public String getTitle() {
         return this.title;
     }
