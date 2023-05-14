@@ -12,9 +12,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-public class MainController {
+public class MainController extends BaseController {
 
-    private final Dao<Note, Integer> noteDao;
     @FXML
     public TextField textFieldTitle;
     @FXML
@@ -23,10 +22,6 @@ public class MainController {
     private ListView<String> listViewNotes;
     private ObservableList<String> notes;
     private String selectedNote;
-
-    public MainController() {
-        this.noteDao = new ConnectDB().loadDB();
-    }
 
     public void initialize() throws SQLException {
         notes = FXCollections.observableArrayList();
