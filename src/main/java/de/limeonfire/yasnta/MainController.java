@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class MainController {
 
-    private Dao<Note, Integer> noteDao;
+    private final Dao<Note, Integer> noteDao;
     @FXML
     public TextField textFieldTitle;
     @FXML
